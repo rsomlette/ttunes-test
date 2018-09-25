@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InputText } from '../../Components/InputText';
+import { ResultItem } from '../../Components/ResultItem';
 import { iTunesService } from '../../Services/ItunesService';
 
 interface IState {
@@ -36,14 +37,22 @@ class App extends React.Component<{}, IState> {
 			.catch(this.handleError);
 	};
 
+	public renderResults = (data: any) => {
+		if (data === null) {
+			return null;
+		}
+		return data.results.map((result: any) => <ResultItem item={result} key={result.trackId} />);
+	};
+
 	public render() {
-		const { value } = this.state;
+		const { value, data } = this.state;
 		return (
 			<div>
 				<div>hello world</div>
 				<form onSubmit={this.performSearch}>
 					<InputText name="input" label="label" value={value} onChange={this.onChange} />
 				</form>
+				{this.renderResults(data)}
 			</div>
 		);
 	}
