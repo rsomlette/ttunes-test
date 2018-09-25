@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InputText } from '../../Components/InputText';
 
 
 class App extends React.Component {
@@ -6,6 +7,7 @@ class App extends React.Component {
     return (
       <div>
         hello world
+        <InputText />
       </div>
     );
   }
