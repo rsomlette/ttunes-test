@@ -32,7 +32,7 @@ class App extends React.Component<{}, IState> {
 		e.preventDefault();
 
 		iTunesService
-			.search({ term: this.state.value })
+			.search({ term: this.state.value, entity: 'musicTrack' })
 			.then(this.saveResults)
 			.catch(this.handleError);
 	};
@@ -48,9 +48,8 @@ class App extends React.Component<{}, IState> {
 		const { value, data } = this.state;
 		return (
 			<div>
-				<div>hello world</div>
 				<form onSubmit={this.performSearch}>
-					<InputText name="input" label="label" value={value} onChange={this.onChange} />
+					<InputText name="input" label="enter artist" value={value} onChange={this.onChange} />
 				</form>
 				{this.renderResults(data)}
 			</div>
