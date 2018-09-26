@@ -1,10 +1,11 @@
 import * as React from "react";
 import { InputText } from "../../Components/InputText";
 import { ResultItem } from "../../Components/ResultItem";
+import { ItunesResponse, ItunesResult } from "../../Models/ItunesResult";
 import { iTunesService } from "../../Services/ItunesService";
 
 interface IState {
-    data: any;
+    data: ItunesResponse | null;
     value: string;
 }
 
@@ -18,8 +19,8 @@ class App extends React.Component<{}, IState> {
         this.setState({ value });
     };
 
-    public saveResults = (response: any) => {
-        this.setState({ data: response.data });
+    public saveResults = (data: ItunesResponse) => {
+        this.setState({ data });
     };
 
     public handleError = (error: Error) => {
@@ -36,11 +37,12 @@ class App extends React.Component<{}, IState> {
             .subscribe(this.saveResults, this.handleError);
     };
 
-    public renderResults = (data: any) => {
+    public renderResults = (data: ItunesResponse | null) => {
         if (data === null) {
             return null;
         }
-        return data.results.map((result: any) => (
+
+        return data.results.map((result: ItunesResult) => (
             <ResultItem item={result} key={result.trackId} />
         ));
     };
