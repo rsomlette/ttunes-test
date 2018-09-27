@@ -6,6 +6,7 @@
     "@types/classnames": "^2.2.6",
     "@types/history": "^4.7.0",
     "@types/react-router": "^4.0.31",
+    "@types/react-router-dom": "^4.3.1",
     "apisauce": "^0.16.0",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
@@ -15,6 +16,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.17.0",
     "rxjs": "^6.3.3",
     "styled-components": "^3.4.9"

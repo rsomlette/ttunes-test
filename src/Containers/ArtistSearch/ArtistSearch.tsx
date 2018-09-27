@@ -24,7 +24,7 @@ interface IProps {
 
 @inject('itunesStore')
 @observer
-class ItunesSearch extends React.Component<IProps, IState> {
+class ArtistSearch extends React.Component<IProps, IState> {
   public state = {
     value: ''
   };
@@ -70,4 +70,4 @@ class ItunesSearch extends React.Component<IProps, IState> {
   }
 }
 
-export default ItunesSearch;
+export default ArtistSearch;
