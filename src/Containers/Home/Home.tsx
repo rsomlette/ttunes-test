@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 
-import ItunesSearch from "./ItunesSearch";
+import ItunesSearch from './ItunesSearch';
 
 class Home extends React.Component {
-    public render() {
-        return <ItunesSearch />;
-    }
+  public render() {
+    return <ItunesSearch />;
+  }
 }
 
 export default Home;
