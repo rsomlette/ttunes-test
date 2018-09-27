@@ -1,8 +1,13 @@
 import { Observable } from "rxjs";
 import { ItunesResponse } from "../Models/ItunesResult";
 import { BaseService } from "./BaseService";
+
+export interface IParam {
+    entity?: string;
+    term: string;
+}
 class ItunesService extends BaseService {
-    public search(params: object): Observable<ItunesResponse> {
+    public search(params: IParam): Observable<ItunesResponse> {
         return this.fetch$<ItunesResponse>("/search", params);
     }
 }

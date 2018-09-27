@@ -7,7 +7,8 @@ interface IProps {
 }
 
 const Wrapper = styled.div`
-    margin-top: 5px;
+    margin-top: 6px;
+    padding: 6px;
     border: 1px solid black;
 `;
 
