@@ -57,9 +57,7 @@ class ArtistSearch extends React.Component<IProps, IState> {
     const { value, error, isValid } = this.state.input;
     const { itunesStore } = this.props;
 
-    const searchResult = itunesStore
-      ? itunesStore.searchResult.get(value)
-      : null;
+    const searchResult = itunesStore ? itunesStore.data.get(value) : null;
     const isLoading = itunesStore ? itunesStore.isLoading : false;
 
     return (
