@@ -6,6 +6,8 @@ import { ItunesContainer } from '../../Components/ItunesContainer';
 import { InputText } from '../../Components/Reusables/InputText';
 
 import { ItunesStore } from '../../Stores/ItunesStore';
+import { isNotEmpty, isValidName } from '../../Validations/ValidationRules';
+import { validate } from '../../Validations/Validator';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,9 +17,14 @@ const Wrapper = styled.div`
 `;
 
 interface IState {
-  value: string;
+  [x: string]: IField;
 }
 
+interface IField {
+  value: string;
+  isValid: boolean;
+  error: string;
+}
 interface IProps {
   itunesStore?: ItunesStore;
 }
@@ -26,11 +33,12 @@ interface IProps {
 @observer
 class ArtistSearch extends React.Component<IProps, IState> {
   public state = {
-    value: ''
+    input: { value: '', isValid: false, error: '' }
   };
 
-  public onChange = (value: string) => {
-    this.setState({ value });
+  public onChange = (value: string, name: string) => {
+    const { isValid, message: error } = this.validateFields(value);
+    this.setState({ [name]: { value, isValid, error } });
   };
 
   public performSearch = (e: any) => {
@@ -40,13 +48,13 @@ class ArtistSearch extends React.Component<IProps, IState> {
     if (itunesStore) {
       itunesStore.search({
         entity: 'musicTrack',
-        term: this.state.value
+        term: this.state.input.value
       });
     }
   };
 
   public render() {
-    const { value } = this.state;
+    const { value, error, isValid } = this.state.input;
     const { itunesStore } = this.props;
 
     const searchResult = itunesStore
@@ -62,12 +70,24 @@ class ArtistSearch extends React.Component<IProps, IState> {
             label="Enter artist"
             value={value}
             onChange={this.onChange}
+            error={error}
+            isValid={isValid}
           />
         </form>
         <ItunesContainer searchResult={searchResult} isLoading={isLoading} />
       </Wrapper>
     );
   }
+
+  private validateFields = (value: string) => {
+    return validate(
+      [
+        { handler: isNotEmpty, message: 'The field should not be empty' },
+        { handler: isValidName, message: 'This does not look like a name' }
+      ],
+      value
+    );
+  };
 }
 
 export default ArtistSearch;

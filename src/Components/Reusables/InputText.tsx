@@ -2,8 +2,12 @@ import classNames from 'classnames';
 import * as React from 'react';
 import styled from 'styled-components';
 
+interface IUnderline {
+  inError?: boolean;
+}
+
 const Underline = styled.span``;
-const CustomInput = styled.input`
+const CustomInput = styled.input<IUnderline>`
   border: 0;
   padding: 4px 0;
   border-bottom: 1px solid #ccc;
@@ -34,7 +38,7 @@ const CustomInput = styled.input`
     left: 0;
     width: 0;
     height: 100%;
-    background-color: #3399ff;
+    background-color: ${({ inError }) => (inError ? 'red' : '#3399ff')};
     transition: 0.4s;
   }
 
@@ -70,20 +74,30 @@ const CustomInput = styled.input`
   &.has-content ~ label {
     top: -16px;
     font-size: 12px;
-    color: #3399ff;
+    color: ${({ inError }) => (inError ? 'red' : '#3399ff')};
     transition: 0.3s;
   }
 `;
 
 const CustomWrapper = styled.div`
-  margin: 16px 0;
   position: relative;
+`;
+
+const ComponentWrapper = styled.div`
+  margin: 16px 0;
+`;
+
+const ErrorWrapper = styled.div`
+  margin-top: 4px;
+  font-size: 14px;
 `;
 
 interface IProps {
   label: string;
   name: string;
   value?: string;
+  error: string;
+  isValid?: boolean;
   onChange: (value: string, name: string) => void;
 }
 
@@ -95,21 +109,33 @@ export class InputText extends React.Component<IProps, {}> {
   };
 
   public render() {
-    const { label, value, name } = this.props;
+    const { label, value, name, isValid, error } = this.props;
 
     const inputClass = classNames({ 'has-content': value });
+    const inError = !isValid && error != null && error !== '';
     return (
-      <CustomWrapper>
-        <CustomInput
-          type="search"
-          className={inputClass}
-          name={name}
-          value={value}
-          onChange={this.handleOnChange}
-        />
-        <label htmlFor={name}>{label}</label>
-        <Underline />
-      </CustomWrapper>
+      <ComponentWrapper>
+        <CustomWrapper>
+          <CustomInput
+            type="search"
+            className={inputClass}
+            name={name}
+            value={value}
+            onChange={this.handleOnChange}
+            inError={inError}
+          />
+          <label htmlFor={name}>{label}</label>
+          <Underline />
+        </CustomWrapper>
+        {this.renderError(error)}
+      </ComponentWrapper>
     );
   }
+
+  private renderError = (error: string) => {
+    if (!error) {
+      return null;
+    }
+    return <ErrorWrapper>{error}</ErrorWrapper>;
+  };
 }
