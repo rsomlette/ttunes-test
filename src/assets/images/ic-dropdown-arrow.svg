@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="7px" viewBox="0 0 13 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-dropdown-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 7.00185 12.6416 7.00185 12.6416 0 5.42101086e-20 8.8817842e-16"></polygon>
+    </defs>
+    <g id="Desktop-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1.1-Demande-de-caution---Indentification" transform="translate(-872.000000, -691.000000)">
+            <g id="ic-dropdown-arrow" transform="translate(872.000000, 691.000000)">
+                <g>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M6.3139,7.00209 L0.1369,0.83909 C-0.0451,0.65609 -0.0451,0.34809 0.1369,0.15009 C0.3189,-0.03091 0.6279,-0.03091 0.8249,0.15009 L6.3139,5.64009 L11.8169,0.13709 C11.9999,-0.04591 12.3079,-0.04591 12.5049,0.13709 C12.6879,0.31909 12.6879,0.62809 12.5049,0.82409 L6.3139,7.00209 Z" id="Fill-1" fill="#FF562D" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

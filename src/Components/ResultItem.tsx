@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled from 'src/lib/styled-component';
 import { ItunesResult } from '../Models/ItunesResult';
 
 interface IProps {
@@ -20,6 +20,9 @@ export const ResultItem = (props: IProps) => (
   <Wrapper>
     <div>
       <Title>Artist:</Title> {props.item.artistName}
+    </div>
+    <div>
+      <Title>Album:</Title> {props.item.collectionName}
     </div>
     <div>
       <Title>Title:</Title> {props.item.trackName}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled from 'src/lib/styled-component';
 import { ItunesResponse, ItunesResult } from '../Models/ItunesResult';
 import { ResultItem } from './ResultItem';
 import { Loader } from './Reusables/Loader';

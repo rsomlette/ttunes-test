@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled from 'src/lib/styled-component';
+import { ThemeSwitcher } from '../theme-switcher';
 
 const Wrapper = styled.div`
   display: flex;
@@ -8,4 +9,14 @@ const Wrapper = styled.div`
   font-size: 24px;
 `;
 
-export const Header = () => <Wrapper>React Practice</Wrapper>;
+interface IProps {
+  currentTheme: string;
+  switchTheme: any;
+}
+
+export const Header = (props: IProps) => (
+  <Wrapper>
+    <div>React Practice</div>
+    <ThemeSwitcher {...props} />
+  </Wrapper>
+);
