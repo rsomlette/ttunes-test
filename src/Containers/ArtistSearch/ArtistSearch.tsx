@@ -7,6 +7,7 @@ import { InputText } from '../../Components/Reusables/InputText';
 
 import { Button } from 'src/Components/Reusables/Button';
 import { ArtistSearchStore } from 'src/Stores/ArtistSearchStore';
+import { AuthenticationStore } from 'src/Stores/AuthenticationStore';
 import { SpotifyStore } from 'src/Stores/SpotifyStore';
 
 const Wrapper = styled.div`
@@ -45,13 +46,20 @@ const CustomForm = styled.form`
 interface IProps {
   spotifyStore?: SpotifyStore;
   artistSearchStore: ArtistSearchStore;
+  authenticationStore: AuthenticationStore;
 }
 
-@inject('spotifyStore', 'itunesStore', 'artistSearchStore')
+@inject(
+  'spotifyStore',
+  'itunesStore',
+  'artistSearchStore',
+  'authenticationStore'
+)
 @observer
 class ArtistSearch extends React.Component<IProps> {
   public onChange = (value: string, name: string) => {
     const { artistSearchStore } = this.props;
+    // TODO: Add debounce if necessary;
     if (artistSearchStore) {
       artistSearchStore.update(value, name);
     }
@@ -72,6 +80,10 @@ class ArtistSearch extends React.Component<IProps> {
     if (error == null) {
       return null;
     }
+    if (error.message === 'CLIENT_ERROR') {
+      this.props.authenticationStore.clearAuthentication();
+    }
+
     return (
       <div>
         <h3>{error.name}</h3>
