@@ -2,8 +2,7 @@ import * as React from 'react';
 import styled from 'src/lib/styled-component';
 
 import { IArtist } from 'src/Models/SpotifyModels/SpotifyArtistsResults';
-// import { ItunesResponse, ItunesResult } from '../Models/ItunesResult';
-// import { ResultItem } from './Cards/ResultItem';
+
 import ArtistItemCard from './Cards/ArtistItemCard';
 import { Loader } from './Reusables/Loader';
 
@@ -23,9 +22,10 @@ const ResultContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
 `;
 
-export class ItunesContainer extends React.Component<IProps, {}> {
+export class ArtistsContainer extends React.Component<IProps, {}> {
   public renderResults = (artists?: IArtist[]) => {
     if (artists == null || artists.length < 1) {
       return null;

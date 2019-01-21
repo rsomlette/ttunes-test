@@ -3,6 +3,7 @@ import { ItunesResponse } from '../Models/ItunesResult';
 import { iTunesService } from '../Services/ItunesService';
 import { BaseStore } from './BaseStore';
 
+// TODO: For future implementation
 export class ItunesStore extends BaseStore<ItunesResponse> {
   public searchArtist(artist: string) {
     this.isLoading = true;

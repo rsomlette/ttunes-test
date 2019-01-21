@@ -36,12 +36,16 @@ const SpotifyLogin = styled.a`
   }
 `;
 
-const config = {
-  clientId: 'cfb16b95614d4dd09b76cb01b6c8449c',
-  redirectUrl: 'https://ttunes.herokuapp.com/authorize'
-};
+const CLIENT_ID = 'cfb16b95614d4dd09b76cb01b6c8449c'
 
-export default () => {
+
+export default class MainScreen extends React.Component {
+public render() {
+  const config = {
+    clientId: CLIENT_ID,
+    redirectUrl: `${window.location.origin}/authorize`
+  };
+
   const authUrl = encodeURI(
     `https://accounts.spotify.com/authorize?client_id=${
       config.clientId
@@ -59,3 +63,4 @@ export default () => {
     </Wrapper>
   );
 };
+}
