@@ -2,6 +2,7 @@ import { Provider } from 'mobx-react';
 import * as React from 'react';
 
 import { createBrowserHistory } from 'history';
+
 import { syncHistoryWithStore } from 'mobx-react-router';
 import { Router } from 'react-router';
 
@@ -12,8 +13,11 @@ const browserHistory = createBrowserHistory();
 
 const history = syncHistoryWithStore(browserHistory, stores.routing);
 
+/* tslint:disable */
+
 class App extends React.Component {
   public render() {
+    console.warn('RENDERING APP.JS');
     return (
       <Provider {...stores}>
         <Router history={history}>

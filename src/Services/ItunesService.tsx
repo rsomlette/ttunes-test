@@ -12,8 +12,14 @@ export interface IParam {
   explicit?: string;
 }
 class ItunesService extends BaseService {
-  public search(params: IParam): Observable<ItunesResponse> {
-    return this.fetch$<ItunesResponse>('/search', params);
+  public searchArtist(artist: string): Observable<ItunesResponse> {
+    return this.fetch$<ItunesResponse>('/search', {
+      attribute: 'artistTerm',
+      entity: 'musicArtist',
+      limit: 50,
+      media: 'music',
+      term: artist
+    });
   }
 }
 

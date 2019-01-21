@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'src/lib/styled-component';
-import { ItunesResult } from '../Models/ItunesResult';
+import { ItunesResult } from '../../Models/ItunesResult';
 
 interface IProps {
   item: ItunesResult;

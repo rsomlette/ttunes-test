@@ -1,17 +1,13 @@
 import { ItunesResponse } from '../Models/ItunesResult';
 
-import { IParam, iTunesService } from '../Services/ItunesService';
+import { iTunesService } from '../Services/ItunesService';
 import { BaseStore } from './BaseStore';
 
 export class ItunesStore extends BaseStore<ItunesResponse> {
-  public search(params: IParam) {
+  public searchArtist(artist: string) {
     this.isLoading = true;
     iTunesService
-      .search(params)
-      .subscribe(
-        this.updateData(params.term),
-        this.updateError,
-        this.stopLoading
-      );
+      .searchArtist(artist)
+      .subscribe(this.updateData(artist), this.updateError, this.stopLoading);
   }
 }

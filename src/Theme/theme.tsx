@@ -3,6 +3,7 @@ interface IColorTheme {
   secondary: string;
   highlight: string;
   text: string;
+  lightText: string;
   border: string;
   link: string;
   textHover: string;

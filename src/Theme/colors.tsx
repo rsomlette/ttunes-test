@@ -2,6 +2,7 @@ export default {
   dark: {
     border: '#15232C',
     highlight: '#333E61',
+    lightText: '#9C9C9C',
     link: '#40a9ff',
     primary: '#202E3C',
     secondary: '#1E2B34',
@@ -11,6 +12,7 @@ export default {
   light: {
     border: '#e0e6ef',
     highlight: '#fff',
+    lightText: '#9C9C9C',
     link: '#40a9ff',
     primary: '#F9FAFB',
     secondary: '#fff',

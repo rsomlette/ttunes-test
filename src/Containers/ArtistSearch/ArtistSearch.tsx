@@ -4,12 +4,11 @@ import styled from 'src/lib/styled-component';
 
 import { ItunesContainer } from '../../Components/ItunesContainer';
 import { InputText } from '../../Components/Reusables/InputText';
-
-import { Button } from 'src/Components/Reusables/Button';
-import { DropdownList } from 'src/Components/Reusables/DropdownList';
-import { ItunesStore } from '../../Stores/ItunesStore';
 import { isNotEmpty, isValidName } from '../../Validations/ValidationRules';
 import { validate } from '../../Validations/Validator';
+
+import { Button } from 'src/Components/Reusables/Button';
+import { SpotifyStore } from 'src/Stores/SpotifyStore';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,8 +25,14 @@ const CustomForm = styled.form`
   margin-top: 1em;
   width: 500px;
 
+  transition: margin-top ease-in-out 200ms;
+
+  &.no-result {
+    margin-top: 30vh;
+  }
+
   & > * {
-    min-width: 300px;
+    min-width: 100px;
     &:not(:last-child) {
       margin-right: 16px;
     }
@@ -44,10 +49,10 @@ interface IField {
   error: string;
 }
 interface IProps {
-  itunesStore?: ItunesStore;
+  spotifyStore?: SpotifyStore;
 }
 
-@inject('itunesStore')
+@inject('spotifyStore', 'itunesStore')
 @observer
 class ArtistSearch extends React.Component<IProps, IState> {
   public state = {
@@ -62,17 +67,12 @@ class ArtistSearch extends React.Component<IProps, IState> {
 
   public performSearch = (e: any) => {
     e.preventDefault();
-    const { itunesStore } = this.props;
-    const { type, artist } = this.state;
+    const { spotifyStore } = this.props;
+    const { artist } = this.state;
     const artistValue = artist.value;
-    const typeValue = type.value;
 
-    if (itunesStore && artistValue && typeValue) {
-      itunesStore.search({
-        attribute: typeValue === 'all' ? undefined : typeValue,
-        entity: 'musicTrack',
-        term: artistValue
-      });
+    if (spotifyStore && artistValue) {
+      spotifyStore.searchArtist(artistValue);
     }
   };
 
@@ -89,54 +89,40 @@ class ArtistSearch extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { itunesStore } = this.props;
+    const { spotifyStore } = this.props;
     const {
       value: valueArtist,
       error: errorArtist,
       isValid: isValidArtist
     } = this.state.artist;
-    const {
-      value: valueType,
-      error: errorType
-      // isValid: isValidType
-    } = this.state.type;
+
+    /* tslint:disable */
 
     const searchResult =
-      itunesStore && valueArtist ? itunesStore.data.get(valueArtist) : null;
-    const isLoading = itunesStore ? itunesStore.isLoading : false;
-    const itunesError = itunesStore ? itunesStore.error : null;
+      spotifyStore && valueArtist ? spotifyStore.data.get(valueArtist) : [];
 
+    const isLoading = spotifyStore ? spotifyStore.isLoading : false;
+    const itunesError = spotifyStore ? spotifyStore.error : null;
+
+    /* tslint:enable */
     return (
       <Wrapper>
-        <CustomForm onSubmit={this.performSearch}>
+        <CustomForm
+          onSubmit={this.performSearch}
+          className={searchResult && searchResult.length > 0 ? '' : 'no-result'}
+        >
           <InputText
             name="artist"
-            label="Enter artist"
+            label="Search for an artist..."
             value={valueArtist}
             onChange={this.onChange}
             error={errorArtist}
             isValid={isValidArtist}
           />
-          <DropdownList
-            onChange={this.onChange}
-            options={[
-              { key: 'all', value: 'All' },
-              { key: 'mixTerm', value: 'Mix Term' },
-              { key: 'genreIndex', value: 'Genre' },
-              { key: 'artistTerm', value: 'Artist' },
-              { key: 'composerTerm', value: 'Composer' },
-              { key: 'albumTerm', value: 'Album' },
-              { key: 'ratingIndex', value: 'Rating' },
-              { key: 'songTerm', value: 'Song' }
-            ]}
-            title={'Selectionner un filtre'}
-            selectedValue={valueType}
-            error={errorType}
-          />
-          <Button type="submit">Chercher</Button>
+          <Button type="submit">Search</Button>
         </CustomForm>
         {this.renderError(itunesError)}
-        <ItunesContainer searchResult={searchResult} isLoading={isLoading} />
+        <ItunesContainer artists={searchResult} isLoading={isLoading} />
       </Wrapper>
     );
   }

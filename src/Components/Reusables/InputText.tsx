@@ -35,7 +35,15 @@ const Underline = styled.span`
 const CustomInput = styled(Input)`
   border: 0;
   padding: 4px 0;
-  background-color: transparent;
+  background-color: transparent !important;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.primary} inset !important;
+    -webkit-text-fill-color: ${({ theme }) => theme.colors.text} !important;
+  }
 
   font: 15px/24px 'Lato', Arial, sans-serif;
   color: ${({ theme }) => theme.colors.text};
@@ -157,6 +165,7 @@ export class InputText extends React.Component<IProps, {}> {
             value={inputValue}
             onChange={this.handleOnChange}
             inError={inError}
+            autoComplete="off"
           />
           <label htmlFor={name}>{label}</label>
           <Underline />

@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+
 export class BaseStore<T> {
   public data = observable.map<string, T>();
   @observable
@@ -17,7 +18,7 @@ export class BaseStore<T> {
   };
 
   public stopLoading = () => {
-    console.info('LOADING'); // tslint:disable-line
+    console.info('STOP LOADING'); // tslint:disable-line
     this.isLoading = false;
   };
 }
