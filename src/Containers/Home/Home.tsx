@@ -27,9 +27,11 @@ interface IProps {
 
 const PageWrapper = styled.div`
   height: 100vh;
+  width: 100vw;
   background-color: ${props => props.theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 
   transition: all linear 200ms;
 
