@@ -52,9 +52,9 @@ export const DetailContainer = styled.div`
 export const Title = styled.div`
   font-weight: 300;
   color: ${({ theme }) => theme.colors.text};
-  /* text-overflow: ellipsis; */
-  white-space: nowrap;
+  /* text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap; */
 `;
 
 export const Subtitle = styled.div`

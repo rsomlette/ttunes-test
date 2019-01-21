@@ -4,10 +4,9 @@ import styled from 'src/lib/styled-component';
 
 import { ArtistsContainer } from '../../Components/ArtistsContainer';
 import { InputText } from '../../Components/Reusables/InputText';
-import { isNotEmpty, isValidName } from '../../Validations/ValidationRules';
-import { validate } from '../../Validations/Validator';
 
 import { Button } from 'src/Components/Reusables/Button';
+import { ArtistSearchStore } from 'src/Stores/ArtistSearchStore';
 import { SpotifyStore } from 'src/Stores/SpotifyStore';
 
 const Wrapper = styled.div`
@@ -43,37 +42,26 @@ const CustomForm = styled.form`
   }
 `;
 
-interface IState {
-  [x: string]: IField;
-}
-
-interface IField {
-  value: string | null;
-  isValid: boolean;
-  error: string;
-}
 interface IProps {
   spotifyStore?: SpotifyStore;
+  artistSearchStore: ArtistSearchStore;
 }
 
-@inject('spotifyStore', 'itunesStore')
+@inject('spotifyStore', 'itunesStore', 'artistSearchStore')
 @observer
-class ArtistSearch extends React.Component<IProps, IState> {
-  public state = {
-    artist: { value: null, isValid: false, error: '' },
-    type: { value: null, isValid: false, error: '' }
-  };
-
+class ArtistSearch extends React.Component<IProps> {
   public onChange = (value: string, name: string) => {
-    const { isValid, message: error } = this.validateFields(value);
-    this.setState({ [name]: { value, isValid, error } });
+    const { artistSearchStore } = this.props;
+    if (artistSearchStore) {
+      artistSearchStore.update(value, name);
+    }
   };
 
   public performSearch = (e: any) => {
     e.preventDefault();
     const { spotifyStore } = this.props;
-    const { artist } = this.state;
-    const artistValue = artist.value;
+    const { artistSearchStore } = this.props;
+    const artistValue = artistSearchStore.artist;
 
     if (spotifyStore && artistValue) {
       spotifyStore.searchArtist(artistValue);
@@ -93,12 +81,12 @@ class ArtistSearch extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { spotifyStore } = this.props;
+    const { spotifyStore, artistSearchStore } = this.props;
     const {
-      value: valueArtist,
+      artist: valueArtist,
       error: errorArtist,
       isValid: isValidArtist
-    } = this.state.artist;
+    } = artistSearchStore;
 
     const searchResult =
       spotifyStore && valueArtist ? spotifyStore.data.get(valueArtist) : [];
@@ -127,16 +115,6 @@ class ArtistSearch extends React.Component<IProps, IState> {
       </Wrapper>
     );
   }
-
-  private validateFields = (value: string) => {
-    return validate(
-      [
-        { handler: isNotEmpty, message: 'The field should not be empty' },
-        { handler: isValidName, message: 'This does not look like a name' }
-      ],
-      value
-    );
-  };
 }
 
 export default ArtistSearch;
