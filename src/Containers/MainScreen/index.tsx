@@ -38,7 +38,7 @@ const SpotifyLogin = styled.a`
 
 const config = {
   clientId: 'cfb16b95614d4dd09b76cb01b6c8449c',
-  redirectUrl: 'http://localhost:3000/authorize'
+  redirectUrl: 'https://ttunes.herokuapp.com/authorize'
 };
 
 export default () => {
