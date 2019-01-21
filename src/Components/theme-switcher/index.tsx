@@ -3,7 +3,7 @@ import { Moon, Sun } from 'react-feather';
 import styled from 'src/lib/styled-component';
 
 const NavItem = styled.div`
-  position: fixed;
+  position: absolute;
 
   top: 10px;
   right: 10px;

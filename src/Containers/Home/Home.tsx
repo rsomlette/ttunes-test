@@ -26,7 +26,7 @@ interface IProps {
 }
 
 const PageWrapper = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   background-color: ${props => props.theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
   overflow: auto;
