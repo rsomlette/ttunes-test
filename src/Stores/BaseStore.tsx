@@ -12,13 +12,11 @@ export class BaseStore<T> {
   };
 
   public updateError = (error: Error) => {
-    console.info('ERROR'); // tslint:disable-line
     this.error = error;
     this.stopLoading();
   };
 
   public stopLoading = () => {
-    console.info('STOP LOADING'); // tslint:disable-line
     this.isLoading = false;
   };
 }

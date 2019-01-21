@@ -59,7 +59,7 @@ class Home extends React.Component<IProps> {
       <Route component={MainScreen} />
     </Switch>
   );
-  /* tslint:disable */
+
   public renderRoutes = () => {
     const { routing, authenticationStore } = this.props;
 
@@ -68,18 +68,13 @@ class Home extends React.Component<IProps> {
       authenticationStore.authentication.expirationDate &&
       authenticationStore.authentication.expirationDate > new Date()
     ) {
-      console.warn(
-        'RENDERING AUTHENTIFIED',
-        authenticationStore.authentication.expirationDate
-      );
       return this.renderAuthenticatedRoutes(routing.location);
     }
-    console.warn('RENDERING GUEST');
+
     return this.renderGuestRoutes(routing.location);
   };
 
   public render() {
-    // const { location } = this.props.routing;
     return (
       <PageWrapper>
         <Header {...this.props} />

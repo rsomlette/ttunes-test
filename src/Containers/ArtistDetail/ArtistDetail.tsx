@@ -16,11 +16,11 @@ interface IPathParams {
 interface IProps extends RouteComponentProps<IPathParams> {
   spotifyStore: SpotifyStore;
 }
-/* tslint:disable */
+
 @inject('spotifyStore')
 @observer
 export class ArtistDetail extends React.Component<IProps, {}> {
-  componentDidMount() {
+  public componentDidMount() {
     const { spotifyStore, match } = this.props;
 
     const artistID = match.params ? match.params.id : '';
@@ -34,8 +34,10 @@ export class ArtistDetail extends React.Component<IProps, {}> {
     }
   }
 
-  renderAlbums = (artistAlbums?: IAlbum[]) => {
-    if (!artistAlbums || artistAlbums.length < 1) return null;
+  public renderAlbums = (artistAlbums?: IAlbum[]) => {
+    if (!artistAlbums || artistAlbums.length < 1) {
+      return null;
+    }
 
     return artistAlbums.map(artistAlbum => (
       <AlbumCard
@@ -59,7 +61,7 @@ export class ArtistDetail extends React.Component<IProps, {}> {
     ));
   };
 
-  render() {
+  public render() {
     const { spotifyStore, match } = this.props;
 
     if (spotifyStore) {

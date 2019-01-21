@@ -96,15 +96,12 @@ class ArtistSearch extends React.Component<IProps, IState> {
       isValid: isValidArtist
     } = this.state.artist;
 
-    /* tslint:disable */
-
     const searchResult =
       spotifyStore && valueArtist ? spotifyStore.data.get(valueArtist) : [];
 
     const isLoading = spotifyStore ? spotifyStore.isLoading : false;
     const itunesError = spotifyStore ? spotifyStore.error : null;
 
-    /* tslint:enable */
     return (
       <Wrapper>
         <CustomForm

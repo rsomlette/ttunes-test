@@ -11,13 +11,12 @@ import { Paths } from '../../routes';
 interface IProps extends RouteComponentProps {
   authenticationStore: AuthenticationStore;
 }
-/* tslint:disable */
+
 @inject('authenticationStore')
 @observer
 export default class Authorize extends React.Component<IProps> {
   public componentDidMount() {
     const params = queryString.parse(location.hash);
-    console.warn('comp did mount', params); // tslint:disable-line
 
     const { authenticationStore } = this.props;
     if (authenticationStore) {
@@ -26,11 +25,9 @@ export default class Authorize extends React.Component<IProps> {
   }
 
   public render() {
-    // spotifyService.searchArtist('30 seconds to mars').subscribe(console.log); // tslint:disable-line
     const { authenticationStore } = this.props;
 
     if (authenticationStore && !authenticationStore.authentication.token) {
-      console.warn('no token, loading');
       return (
         <div>
           <div>Authorization screen</div>
@@ -38,7 +35,7 @@ export default class Authorize extends React.Component<IProps> {
         </div>
       );
     }
-    console.warn('token available, redirecting');
+
     return <Redirect to={Paths.home} from={Paths.authorize} push={true} />;
   }
 }

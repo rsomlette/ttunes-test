@@ -17,7 +17,6 @@ const history = syncHistoryWithStore(browserHistory, stores.routing);
 
 class App extends React.Component {
   public render() {
-    console.warn('RENDERING APP.JS');
     return (
       <Provider {...stores}>
         <Router history={history}>
