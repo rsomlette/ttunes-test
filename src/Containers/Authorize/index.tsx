@@ -1,24 +1,44 @@
 import { inject, observer } from 'mobx-react';
 import * as queryString from 'query-string';
 import * as React from 'react';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { Loader } from 'src/Components/Reusables/Loader';
 import { AuthenticationStore } from 'src/Stores/AuthenticationStore';
 
+import styled from 'src/lib/styled-component';
 import { Paths } from '../../routes';
 
 interface IProps extends RouteComponentProps {
   authenticationStore: AuthenticationStore;
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    margin-top: 16px;
+    color: ${({ theme }) => theme.colors.link};
+    font-size: 14px;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.textHover};
+    }
+  }
+`;
+
 @inject('authenticationStore')
 @observer
 export default class Authorize extends React.Component<IProps> {
   public componentDidMount() {
-    const params = queryString.parse(location.hash);
+    const { authenticationStore, location } = this.props;
+    const params = location.hash
+      ? queryString.parse(location.hash)
+      : queryString.parse(location.search);
 
-    const { authenticationStore } = this.props;
     if (authenticationStore) {
       authenticationStore.saveAuthentication(params);
     }
@@ -28,11 +48,20 @@ export default class Authorize extends React.Component<IProps> {
     const { authenticationStore } = this.props;
 
     if (authenticationStore && !authenticationStore.authentication.token) {
+      if (authenticationStore.authentication.error) {
+        return (
+          <Wrapper>
+            <h3>Authorization screen</h3>
+            Authorization denied.
+            <Link to={Paths.home}>Back</Link>
+          </Wrapper>
+        );
+      }
       return (
-        <div>
-          <div>Authorization screen</div>
-          <Loader isLoading={true} />;
-        </div>
+        <Wrapper>
+          <h3>Authorization screen</h3>
+          <Loader isLoading={true} />
+        </Wrapper>
       );
     }
 

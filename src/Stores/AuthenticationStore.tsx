@@ -3,11 +3,13 @@ import { observable } from 'mobx';
 import { spotifyService } from 'src/Services/SpotifyService';
 
 interface IAuthentication {
-  token: string;
+  error: string;
   expirationDate: Date | null;
+  token: string;
 }
 
 const INITIAL_STATE_AUTHENTICATION = {
+  error: '',
   expirationDate: null,
   token: ''
 };
@@ -22,13 +24,17 @@ export class AuthenticationStore {
 
   public saveAuthentication(authentication: any) {
     const token = authentication.access_token;
-
+    const error = authentication.error;
     const expirationDate = new Date();
-    expirationDate.setSeconds(
-      expirationDate.getSeconds() + parseInt(authentication.expires_in, 10)
-    );
+
+    if (authentication.expires_in) {
+      expirationDate.setSeconds(
+        expirationDate.getSeconds() + parseInt(authentication.expires_in, 10)
+      );
+    }
 
     this.authentication = {
+      error,
       expirationDate,
       token
     };
