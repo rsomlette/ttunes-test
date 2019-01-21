@@ -13,8 +13,7 @@ import { AuthenticationStore } from 'src/Stores/AuthenticationStore';
 import { Header } from '../../Components/header/header.component';
 import { NotFound } from '../../Components/not-found/not-found.component';
 
-import { About } from '../About/About';
-import { ArtistDetail } from '../ArtistDetail/ArtistDetail';
+import ArtistDetail from '../ArtistDetail/ArtistDetail';
 import ArtistSearch from '../ArtistSearch/ArtistSearch';
 import Authorize from '../Authorize';
 import MainScreen from '../MainScreen';
@@ -30,6 +29,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   background-color: ${props => props.theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
+  overflow: auto;
 
   transition: all linear 200ms;
 
@@ -44,7 +44,7 @@ class Home extends React.Component<IProps> {
   public renderAuthenticatedRoutes = (location: any) => (
     <Switch location={location}>
       <Route exact={true} path={Paths.home} component={ArtistSearch} />
-      <Route exact={true} path={Paths.about} component={About} />
+
       <Route exact={true} path={Paths.artist} component={ArtistDetail} />
       <Route path={Paths.authorize} component={Authorize} />
       <Route component={NotFound} />
@@ -53,7 +53,6 @@ class Home extends React.Component<IProps> {
 
   public renderGuestRoutes = (location: any) => (
     <Switch location={location}>
-      <Route exact={true} path={Paths.about} component={About} />
       <Route path={Paths.authorize} component={Authorize} />
 
       <Route component={MainScreen} />

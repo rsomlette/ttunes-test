@@ -6,12 +6,11 @@ import { ThemeSwitcher } from '../theme-switcher';
 
 const Wrapper = styled.header`
   display: flex;
-
+  position: relative;
   align-items: center;
   font-weight: 300;
   font-size: 20px;
 
-  /* padding-left: 16px; */
   background-color: ${({ theme }) => theme.colors.secondary};
   height: 45px;
 
@@ -37,7 +36,6 @@ interface IProps {
 export const Header = (props: IProps) => (
   <Wrapper>
     <Link to={Paths.home}>Spotify Artist Search</Link>
-    {/* <Link to={Paths.about}>About</Link> */}
     <ThemeSwitcher {...props} />
   </Wrapper>
 );

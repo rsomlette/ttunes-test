@@ -1,21 +1,44 @@
+import { Link } from 'react-router-dom';
+import { css } from 'styled-components';
+
 import styled from 'src/lib/styled-component';
 
 interface ISource {
   src: string;
 }
 
-export const Wrapper = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.border};
+export const DetailArtist = styled.div`
+  margin-left: 15px;
+`;
+
+const wrapperCss = css`
   height: 240px;
   width: 160px;
 
-  margin-right: 30px;
-  margin-bottom: 25px;
+  margin: 0 15px 25px 15px;
+`;
+
+export const Wrapper = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  ${wrapperCss}
+`;
+
+export const LinkWrapper = styled(Link)`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  ${wrapperCss}
+
+  text-decoration: none;
+  background-color: transparent;
+  transition: background-color 200ms linear;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.highlight};
+  }
 `;
 
 export const CoverImage = styled.div<ISource>`
   width: 100%;
-  height: 120px;
+  height: 50%;
   background-image: url(${props => props.src});
   background-size: cover;
 `;
@@ -23,13 +46,13 @@ export const CoverImage = styled.div<ISource>`
 export const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 50%;
 `;
 
 export const Title = styled.div`
   font-weight: 300;
   color: ${({ theme }) => theme.colors.text};
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   white-space: nowrap;
   overflow: hidden;
 `;
@@ -63,6 +86,13 @@ export const TextContent = styled.div`
   flex-direction: column;
   padding: 5px;
   height: 90px;
+`;
+
+export const ArtistContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  height: 100%;
 `;
 
 export const DateWrapper = styled(Subtitle)`

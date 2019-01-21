@@ -2,7 +2,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import styled from 'src/lib/styled-component';
 
-import { ItunesContainer } from '../../Components/ItunesContainer';
+import { ArtistsContainer } from '../../Components/ArtistsContainer';
 import { InputText } from '../../Components/Reusables/InputText';
 import { isNotEmpty, isValidName } from '../../Validations/ValidationRules';
 import { validate } from '../../Validations/Validator';
@@ -23,9 +23,13 @@ const CustomForm = styled.form`
   justify-content: center;
 
   margin-top: 1em;
-  width: 500px;
+  min-width: 500px;
 
-  transition: margin-top ease-in-out 200ms;
+  transition: all ease-in-out 200ms;
+
+  @media (max-width: 600px) {
+    min-width: 95vw;
+  }
 
   &.no-result {
     margin-top: 30vh;
@@ -119,7 +123,7 @@ class ArtistSearch extends React.Component<IProps, IState> {
           <Button type="submit">Search</Button>
         </CustomForm>
         {this.renderError(itunesError)}
-        <ItunesContainer artists={searchResult} isLoading={isLoading} />
+        <ArtistsContainer artists={searchResult} isLoading={isLoading} />
       </Wrapper>
     );
   }
