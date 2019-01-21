@@ -4,6 +4,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import AlbumCard from 'src/Components/Cards/AlbumCard';
+import { DetailArtist } from 'src/Components/Cards/StyledComponents';
 import { Loader } from 'src/Components/Reusables/Loader';
 import { IAlbum } from 'src/Models/SpotifyModels/SpotifyArtistsAlbumResults';
 import { SpotifyStore } from 'src/Stores/SpotifyStore';
@@ -19,7 +20,7 @@ interface IProps extends RouteComponentProps<IPathParams> {
 
 @inject('spotifyStore')
 @observer
-export class ArtistDetail extends React.Component<IProps, {}> {
+export default class ArtistDetail extends React.Component<IProps, {}> {
   public componentDidMount() {
     const { spotifyStore, match } = this.props;
 
@@ -76,10 +77,10 @@ export class ArtistDetail extends React.Component<IProps, {}> {
         <div>
           <Loader isLoading={isLoading} />
           <div>
-            <div>
+            <DetailArtist>
               <h3>{artist ? artist.name : ''}</h3>
               <div>Albums</div>
-            </div>
+            </DetailArtist>
             <AlbumsContainer>{this.renderAlbums(artistAlbums)}</AlbumsContainer>
           </div>
         </div>

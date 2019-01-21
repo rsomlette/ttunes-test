@@ -11,6 +11,8 @@ export interface IParam {
   lang?: string;
   explicit?: string;
 }
+
+// TODO: For future implementation
 class ItunesService extends BaseService {
   public searchArtist(artist: string): Observable<ItunesResponse> {
     return this.fetch$<ItunesResponse>('/search', {
