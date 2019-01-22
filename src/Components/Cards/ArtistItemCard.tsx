@@ -6,6 +6,7 @@ import Artist from '../../assets/images/artist.svg';
 import { Ratings } from '../Reusables/Ratings';
 import {
   ArtistContent,
+  CoverImage,
   DetailContainer,
   LinkWrapper,
   Subtitle,
@@ -14,12 +15,6 @@ import {
 
 const RatingWrapper = styled(Ratings)`
   margin-top: auto;
-`;
-
-const CoverImage = styled.img`
-  width: 100%;
-  height: 115px;
-  object-fit: cover;
 `;
 
 interface IProps {
