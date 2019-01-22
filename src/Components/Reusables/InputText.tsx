@@ -37,6 +37,7 @@ const CustomInput = styled(Input)`
   padding: 4px 0;
   background-color: transparent !important;
 
+  -webkit-appearance: none;
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,

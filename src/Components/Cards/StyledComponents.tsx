@@ -68,13 +68,14 @@ export const SpotifyPreview = styled.a`
   height: 30px;
   background-color: ${({ theme }) => theme.colors.secondary};
   display: flex;
-  margin-bottom: 2px;
+
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
   font-size: 10px;
   border-top: 1px solid ${({ theme }) => theme.colors.border};
+  transition: background-color linear 0.3s;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.highlight};
