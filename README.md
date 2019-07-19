@@ -9,9 +9,10 @@ Base React app with spotify api
 
 ### Demo available
 
-[Here](https://ttunes.herokuapp.com/ 'Spotify Artist Search')
+[Heroku](https://ttunes.herokuapp.com/ 'Spotify Artist Search')
+[Github Pages](https://ttunes.herokuapp.com/ 'https://rsomlette.github.io/ttunes-test/')
 
 ### To start the project
 
-- `yarn instal`
+- `yarn install`
 - `yarn start`
